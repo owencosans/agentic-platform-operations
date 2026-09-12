@@ -116,7 +116,7 @@ jobs:
         id: claude
         uses: anthropics/claude-code-action@56cf60fde42f7b19c3abfd5c9c48b69a1288461f # v1.0.221
         with:
-          allowed_tools: "Bash, Read, Grep, Glob, Write, Edit"
+          show_full_output: true
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           base_branch: ${{ steps.contract.outputs.base_branch }}
           branch_prefix: auto-repro/
@@ -127,6 +127,7 @@ jobs:
             The reproduction should fail for the actual behavioral reason described by the incident, not because of syntax, type, setup, or lint errors.
           claude_args: |
             --max-turns 32
+            --allowedTools Edit,Write,Bash,Read,Grep,Glob,Task
             --append-system-prompt "Reproduction-only role. Never repair the defect. A safe refusal is preferable to fabricating a failing test."
 
       - name: Check out exact reproduction branch

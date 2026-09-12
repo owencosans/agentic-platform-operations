@@ -168,7 +168,7 @@ jobs:
         id: claude
         uses: anthropics/claude-code-action@56cf60fde42f7b19c3abfd5c9c48b69a1288461f # v1.0.221
         with:
-          allowed_tools: "Bash, Read, Grep, Glob, Write, Edit"
+          show_full_output: true
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           base_branch: ${{ inputs.reproduction_branch }}
           branch_prefix: auto-repair/
@@ -180,6 +180,7 @@ jobs:
             Do not merge, deploy, change secrets, edit GitHub workflows/policies/project contract, touch protected auth/authorization/payment/RLS/migration domains, perform destructive data operations, or broaden scope. Prefer no change over a speculative repair.
           claude_args: |
             --max-turns 40
+            --allowedTools Edit,Write,Bash,Read,Grep,Glob,Task
             --append-system-prompt "Repair-only role. The reproduction evidence is immutable. Deterministic checks are authoritative; never weaken tests or safeguards to obtain green."
 
       - name: Check out exact repair branch produced by builder
