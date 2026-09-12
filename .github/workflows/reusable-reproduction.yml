@@ -138,6 +138,7 @@ jobs:
           CLAUDE_BRANCH: auto-repro/issue-${{ inputs.issue_number }}
         run: |
           set -euo pipefail
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if ! git ls-remote --exit-code --heads origin "$CLAUDE_BRANCH" >/dev/null 2>&1; then
             echo "::error::Expected reproduction branch $CLAUDE_BRANCH was not pushed by the agent."
             exit 1

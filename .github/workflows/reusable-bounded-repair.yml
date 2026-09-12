@@ -190,6 +190,7 @@ jobs:
           CLAUDE_BRANCH: auto-repair/issue-${{ inputs.issue_number }}
         run: |
           set -euo pipefail
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if ! git ls-remote --exit-code --heads origin "$CLAUDE_BRANCH" >/dev/null 2>&1; then
             echo "has_branch=false" >> "$GITHUB_OUTPUT"
             exit 0
