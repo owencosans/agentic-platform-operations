@@ -118,7 +118,7 @@ jobs:
             }
           fi
 
-          gh issue view "$ISSUE_NUMBER" --comments --json comments --jq '.comments[].body' > "$RUNNER_TEMP/comments.txt"
+          gh issue view "$ISSUE_NUMBER" --json comments --jq '.comments[].body' > "$RUNNER_TEMP/comments.txt"
           EXPECTED="agentic-reproduction: branch=${REPRODUCTION_BRANCH} sha=${REPRODUCTION_SHA} status=failing"
           grep -Fq -- "$EXPECTED" "$RUNNER_TEMP/comments.txt" || {
             echo '::error::Repair input does not match the immutable reproduction recorded on the incident.'
