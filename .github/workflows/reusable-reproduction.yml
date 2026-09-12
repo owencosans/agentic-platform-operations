@@ -138,7 +138,10 @@ jobs:
           CLAUDE_BRANCH: auto-repro/issue-${{ inputs.issue_number }}
         run: |
           set -euo pipefail
-          git ls-remote --exit-code --heads origin "$CLAUDE_BRANCH" >/dev/null \n            || { echo "::error::Expected reproduction branch $CLAUDE_BRANCH was not pushed by the agent."; exit 1; }
+          if ! git ls-remote --exit-code --heads origin "$CLAUDE_BRANCH" >/dev/null 2>&1; then
+            echo "::error::Expected reproduction branch $CLAUDE_BRANCH was not pushed by the agent."
+            exit 1
+          fi
           git fetch --no-tags origin "refs/heads/${CLAUDE_BRANCH}:refs/remotes/origin/${CLAUDE_BRANCH}"
           git checkout --detach "origin/${CLAUDE_BRANCH}"
           echo "branch=$CLAUDE_BRANCH" >> "$GITHUB_OUTPUT"
