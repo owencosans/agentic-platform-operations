@@ -228,7 +228,7 @@ jobs:
               ('github-classic-pat', re.compile(r'ghp_[A-Za-z0-9]{20,}')),
               ('aws-access-key', re.compile(r'AKIA[0-9A-Z]{16}')),
               ('anthropic-api-key', re.compile(r'sk-ant-[A-Za-z0-9_-]{20,}')),
-              ('openai-api-key', re.compile(r'sk-(?!ant-)(?:(?:proj|svcacct)-)?[A-Za-z0-9_-]{20,}')),
+              ('openai-api-key', re.compile(r'sk-(?!ant-)(?:(?:proj|svcacct)-)?(?=[A-Za-z0-9_-]*[0-9])[A-Za-z0-9_-]{20,}')),
           ]
           pem = re.compile(
               r'-----BEGIN (?:(?:RSA|EC|OPENSSH) )?PRIVATE KEY-----'
