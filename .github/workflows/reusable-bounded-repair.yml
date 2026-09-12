@@ -72,10 +72,10 @@ jobs:
           emit() {
             local key="$1" expr="$2" value
             value="$(jq -r "$expr // \"\"" "$CONFIG_PATH")"
-            if printf '%s' "$value" | grep -q $'\n'; then
+            case "$value" in *$'\n'*)
               echo "::error::Contract field $key must be one line"
               exit 1
-            fi
+            ;; esac
             printf '%s=%s\n' "$key" "$value" >> "$GITHUB_OUTPUT"
           }
           emit base_branch '.project.defaultBranch'
