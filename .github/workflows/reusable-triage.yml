@@ -37,7 +37,7 @@ jobs:
           test -f .agentic/platform-ops.json && cp .agentic/platform-ops.json .agentic-input/platform-ops.json || printf '%s\n' '{}' > .agentic-input/platform-ops.json
       - name: Triage Agent — evidence-bounded diagnosis
         id: triage_agent
-        uses: anthropics/claude-code-action@56cf60fde42f7b19c3abfd5c9c48b69a1288461f # v1.0.221
+        uses: anthropics/claude-code-action@56cf60fde42f7b19c3abfd5c9c48b69a1288461f # v1.0.222
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ github.token }}
